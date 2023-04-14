@@ -4,12 +4,13 @@ import { IUserRepository } from 'src/domain/interfaces/iusers-repository';
 
 @Injectable()
 export class UserRepository {
+  // IUserRepositoryはNestJSのDIの仕組みで容易に入れ替え可能
   constructor(private userRepo: IUserRepository) {}
 
   async find(id: number): Promise<User> {
-    return await this.userRepo.find(id);
+    return await this.userRepo.getOne(id);
   }
   async findAll(): Promise<User[]> {
-    return await this.userRepo.findAll();
+    return await this.userRepo.getAll();
   }
 }

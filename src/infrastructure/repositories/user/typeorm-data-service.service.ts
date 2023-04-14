@@ -1,15 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { User } from 'src/domain/entities/user.entity';
 import { IUserRepository } from 'src/domain/interfaces/iusers-repository';
-import { Repository,dataSource } from 'typeorm'
+import { getRepository, Repository } from 'typeorm';
 @Injectable()
-export class TypeORMDataService extends Repository<User> implements IUserRepository {
-  async findAll(): Promise<User[]> {
-    // return Promise.resolve([new User(1, 'TypeORMs')]);
-    const userRepository = dataSource.getRepository(User)
-    return userRepository.
+export class TypeORMDataService
+  extends Repository<User>
+  implements IUserRepository
+{
+  async getAll(): Promise<User[]> {
+    // TODO: DataSourceに変更
+    const itemRepository = getRepository(User).find();
+    return itemRepository;
   }
-  async find(id: number): Promise<User> {
-    return Promise.resolve(new User(id, 'TypeORM'));
+  async getOne(id: number): Promise<User> {
+    const itemRepository = getRepository(User).findOneBy({ id });
+    return itemRepository;
   }
 }

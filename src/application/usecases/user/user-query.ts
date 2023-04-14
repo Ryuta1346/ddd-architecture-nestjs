@@ -12,6 +12,5 @@ export class UserQueryUseCase {
 
   async findAll(): Promise<User[]> {
     return await this.userRepo.findAll();
-    // return Promise.resolve('test');
   }
 }
