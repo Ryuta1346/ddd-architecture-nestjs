@@ -4,10 +4,17 @@ import { IUserRepository } from 'src/domain/interfaces/iusers-repository';
 
 @Injectable()
 export class InmemoryDataService implements IUserRepository {
-  async getAll(): Promise<User[]> {
-    return Promise.resolve([new User(1, 'all')]);
+  private users: User[] = [
+    new User(1, 'user1'),
+    new User(2, 'user2'),
+    new User(3, 'user3'),
+  ];
+
+  async findAll(): Promise<User[]> {
+    return Promise.resolve(this.users);
   }
-  async getOne(id: number): Promise<User> {
-    return Promise.resolve(new User(id, 'find'));
+
+  async findOneById(id: number): Promise<User> {
+    return Promise.resolve(this.users.find((u) => u.id === id));
   }
 }

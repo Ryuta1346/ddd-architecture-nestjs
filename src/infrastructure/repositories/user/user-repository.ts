@@ -8,9 +8,9 @@ export class UserRepository {
   constructor(private userRepo: IUserRepository) {}
 
   async find(id: number): Promise<User> {
-    return await this.userRepo.getOne(id);
+    return await this.userRepo.findOneById(id);
   }
   async findAll(): Promise<User[]> {
-    return await this.userRepo.getAll();
+    return await this.userRepo.findAll();
   }
 }
