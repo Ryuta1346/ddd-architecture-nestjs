@@ -5,12 +5,10 @@
     "username": "ddd_user",
     "password": "password",
     "database": "ddd_verification",
-    "entities": ["src/**/*.entity{.ts,.js}"],
-    "migrations": ["src/migration/**/*.ts"],
+    "entities": ["src/**/*.entity.ts"],
+    "migrations": ["src/migrations/**/*.ts"],
     "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
+      "migrationsDir": "src/migrations"
     },
     "synchronize": false
-  }
+}
