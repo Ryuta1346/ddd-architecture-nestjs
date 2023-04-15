@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { Users } from 'src/domain/entities/user.entity';
-import { IUserRepository } from 'src/domain/interfaces/iusers-repository';
-import { AppDataSource } from 'src/infrastructure/data-source';
+import { AppDataSource } from 'data-source';
+import { Users } from 'domain/entities/user.entity';
+import { IUserRepository } from 'domain/interfaces/iusers-repository';
+
 import { Repository } from 'typeorm';
 @Injectable()
 export class TypeORMDataService
@@ -14,9 +15,9 @@ export class TypeORMDataService
     return itemRepository;
   }
   async findOneById(id: number): Promise<Users> {
-    const itemRepository = await this.createQueryBuilder('user')
-      .where('user.id = :id', { id })
-      .getOne();
+    const itemRepository = await AppDataSource.getRepository(Users).findOneBy({
+      id,
+    });
     return itemRepository;
   }
 }
