@@ -8,7 +8,12 @@ import { InmemoryDataService } from './inmemory-data-service.service';
   imports: [],
   providers: [
     UserRepository,
-    { provide: IUserRepository, useClass: TypeORMDataService },
+    {
+      provide: IUserRepository,
+      useClass:
+        // 環境変数DB=testの場合は自動でInmemoryを使うように設定(CI時など)
+        process.env.DB === 'test' ? InmemoryDataService : TypeORMDataService,
+    },
   ],
   exports: [UserRepository],
 })
