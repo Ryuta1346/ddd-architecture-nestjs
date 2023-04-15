@@ -6,5 +6,11 @@
     "password": "password",
     "database": "ddd_verification",
     "entities": ["src/**/*.entity{.ts,.js}"],
+    "migrations": ["src/migration/**/*.ts"],
+    "cli": {
+      "entitiesDir": "src/entity",
+      "migrationsDir": "src/migration",
+      "subscribersDir": "src/subscriber"
+    },
     "synchronize": false
   }

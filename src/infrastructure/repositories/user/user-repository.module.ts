@@ -8,7 +8,7 @@ import { InmemoryDataService } from './inmemory-data-service.service';
   imports: [],
   providers: [
     UserRepository,
-    { provide: IUserRepository, useClass: InmemoryDataService },
+    { provide: IUserRepository, useClass: TypeORMDataService },
   ],
   exports: [UserRepository],
 })

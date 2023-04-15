@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { User } from '../../domain/entities/user.entity';
+import { Users } from '../../domain/entities/user.entity';
 import { UserQueryUseCase } from 'src/application/usecases/user/user-query';
 
 @Controller('api/users')
@@ -13,7 +13,7 @@ export class UserController {
   //   }
 
   @Get()
-  async findAll(): Promise<User[]> {
+  async findAll(): Promise<Users[]> {
     console.log('controller-findAll');
     return this.userQueryUsecase.findAll();
     // return { response: 'test' };
