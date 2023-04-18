@@ -5,6 +5,7 @@ import { UserController } from './controller/users/users.controller';
 import { UserRepositoryModule } from './infrastructure/repositories/user/user-repository.module';
 import { UserUseCaseModule } from './application/usecases/user/user-usecase.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PersonModule } from './person/person.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -20,6 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     UserRepositoryModule,
     UserUseCaseModule,
+    PersonModule,
   ],
   controllers: [AppController, UserController],
   providers: [AppService, UserUseCaseModule],
