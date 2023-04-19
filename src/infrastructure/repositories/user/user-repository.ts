@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Users } from '../../../domain/entities/user.entity';
 import { IUserRepository } from '../../../domain/interfaces/iusers-repository';
-import { validate } from 'class-validator';
-import { async } from 'rxjs';
 
 @Injectable()
 export class UserRepository {
@@ -10,20 +8,10 @@ export class UserRepository {
   constructor(private userRepo: IUserRepository) {}
 
   async find(id: number): Promise<Users> {
-    const userEntity = await this.userRepo.findOneById(id);
-    return new Users(
-      userEntity.id,
-      userEntity.firstName,
-      userEntity.lastName,
-      userEntity.age,
-    );
+    return await this.userRepo.findOneById(id);
   }
   async findAll(): Promise<Users[]> {
-    const users = await this.userRepo.findAll();
-
-    return users.map(
-      (user) => new Users(user.id, user.firstName, user.lastName, user.age),
-    );
+    return await this.userRepo.findAll();
   }
 
   async save(user: Users): Promise<void> {

@@ -1,13 +1,3 @@
-import {
-  IsNumber,
-  IsString,
-  Length,
-  Max,
-  MaxLength,
-  Min,
-  MinLength,
-  validate,
-} from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
