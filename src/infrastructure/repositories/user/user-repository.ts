@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Users } from '../../../domain/entities/user.entity';
 import { IUserRepository } from '../../../domain/interfaces/iusers-repository';
+import { validate } from 'class-validator';
+import { async } from 'rxjs';
 
 @Injectable()
 export class UserRepository {
@@ -8,9 +10,35 @@ export class UserRepository {
   constructor(private userRepo: IUserRepository) {}
 
   async find(id: number): Promise<Users> {
-    return await this.userRepo.findOneById(id);
+    const userEntity = await this.userRepo.findOneById(id);
+    return new Users(
+      userEntity.id,
+      userEntity.firstName,
+      userEntity.lastName,
+      userEntity.age,
+    );
   }
   async findAll(): Promise<Users[]> {
-    return await this.userRepo.findAll();
+    const users = await this.userRepo.findAll();
+    users.map((user) =>
+      validate(user).then((errors) => {
+        // errors is an array of validation errors
+        console.log('===errors: ', { errors });
+        if (errors.length > 0) {
+          console.log('validation failed. errors: ', errors);
+          throw new Error(`${errors}`);
+        } else {
+          console.log('validation succeed');
+        }
+      }),
+    );
+
+    return users.map(
+      (user) => new Users(user.id, user.firstName, user.lastName, user.age),
+    );
+  }
+
+  async save(user: Users): Promise<void> {
+    await this.userRepo.insertEntity(user);
   }
 }

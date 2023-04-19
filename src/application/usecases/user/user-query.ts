@@ -13,4 +13,8 @@ export class UserQueryUseCase {
   async findAll(): Promise<Users[]> {
     return await this.userRepo.findAll();
   }
+
+  async save(user: Users): Promise<void> {
+    await this.userRepo.save(user);
+  }
 }
