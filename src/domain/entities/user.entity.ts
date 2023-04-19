@@ -5,7 +5,7 @@ import {
   MaxLength,
   Min,
   MinLength,
-  validate,
+  validateSync,
 } from 'class-validator';
 
 export class Users {
@@ -26,59 +26,13 @@ export class Users {
   age: number;
 
   constructor(id: number, firstName: string, lastName: string, age: number) {
-    // this.validate(id, firstName, lastName, age);
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
-  }
-
-  static async validate(
-    id: number,
-    firstName: string,
-    lastName: string,
-    age: number,
-  ) {
-    validate({
-      id,
-      firstName,
-      lastName,
-      age,
-    }).then((errors) => {
-      // errors is an array of validation errors
-      console.log('===errors!: ', { errors });
-      if (errors.length > 0) {
-        console.log('validation failed. errors!!!: ', errors);
-        throw new Error(`${errors}`);
-      } else {
-        console.log('validation succeed!!!');
-      }
-    });
-  }
-
-  private validate(
-    id: number,
-    firstName: string,
-    lastName: string,
-    age: number,
-  ) {
-    if (!firstName || !lastName || !age) {
-      return;
+    const errors = validateSync(this);
+    if (errors.length > 0) {
+      throw new Error(`Validation failed! ${JSON.stringify(errors)}`);
     }
-    if (age < 0 || age >= 130) {
-      throw new Error('Age must be between 0 and 130');
-    }
-
-    if (firstName.length > 30) {
-      throw new Error('First name must be 30 characters or less');
-    }
-
-    if (lastName.length > 30) {
-      throw new Error('Last name must be 30 characters or less');
-    }
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
   }
 }

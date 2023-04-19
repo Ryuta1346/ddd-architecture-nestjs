@@ -20,18 +20,6 @@ export class UserRepository {
   }
   async findAll(): Promise<Users[]> {
     const users = await this.userRepo.findAll();
-    users.map((user) =>
-      validate(user).then((errors) => {
-        // errors is an array of validation errors
-        console.log('===errors: ', { errors });
-        if (errors.length > 0) {
-          console.log('validation failed. errors: ', errors);
-          throw new Error(`${errors}`);
-        } else {
-          console.log('validation succeed');
-        }
-      }),
-    );
 
     return users.map(
       (user) => new Users(user.id, user.firstName, user.lastName, user.age),
