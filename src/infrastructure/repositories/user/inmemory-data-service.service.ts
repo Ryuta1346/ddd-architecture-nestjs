@@ -5,9 +5,9 @@ import { Users } from 'domain/entities/user.entity';
 @Injectable()
 export class InmemoryDataService implements IUserRepository {
   private users: Users[] = [
-    new Users(1, 'first1aaaaaaaaaaaaaaaaa', 'last1', 30),
+    new Users(1, 'first1', 'last1', 30),
     new Users(1, 'first2', 'last2', 30),
-    new Users(1, 'first3', 'last3', 150),
+    new Users(1, 'first3', 'last3', 100),
   ];
 
   async findAll(): Promise<Users[]> {
