@@ -4,7 +4,6 @@ import { IUserRepository } from '../../../domain/interfaces/iusers-repository';
 
 @Injectable()
 export class UserRepository {
-  // IUserRepositoryはNestJSのDIの仕組みで容易に入れ替え可能
   constructor(private userRepo: IUserRepository) {}
 
   async find(id: number): Promise<Users> {
