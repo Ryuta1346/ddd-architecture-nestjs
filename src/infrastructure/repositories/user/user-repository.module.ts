@@ -1,19 +1,17 @@
 import { Module } from '@nestjs/common';
 import { IUserRepository } from '../../../domain/interfaces/iusers-repository';
-import { UserRepository } from './user-repository';
-import { TypeORMDataService } from './typeorm-data-service.service';
+import { ORMDataService } from './orm-data-service.service';
 import { InmemoryDataService } from './inmemory-data-service.service';
 
 @Module({
   imports: [],
   providers: [
-    UserRepository,
     {
       provide: IUserRepository,
       useClass:
-        process.env.DB === 'test' ? InmemoryDataService : TypeORMDataService,
+        process.env.DB === 'test' ? InmemoryDataService : ORMDataService,
     },
   ],
-  exports: [UserRepository],
+  exports: [IUserRepository],
 })
 export class UserRepositoryModule {}

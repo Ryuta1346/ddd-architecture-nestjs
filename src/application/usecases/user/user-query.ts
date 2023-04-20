@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { Users } from 'domain/entities/user.entity';
-import { UserRepository } from 'infrastructure/repositories/user';
+import { IUserRepository } from 'domain/interfaces/iusers-repository';
 
 @Injectable()
 export class UserQueryUseCase {
-  constructor(private userRepo: UserRepository) {}
+  constructor(private userRepo: IUserRepository) {}
 
   async find(id: number): Promise<Users> {
-    return this.userRepo.find(id);
+    return this.userRepo.findOneById(id);
   }
 
   async findAll(): Promise<Users[]> {
@@ -15,6 +15,6 @@ export class UserQueryUseCase {
   }
 
   async save(user: Users): Promise<void> {
-    await this.userRepo.save(user);
+    await this.userRepo.insertEntity(user);
   }
 }

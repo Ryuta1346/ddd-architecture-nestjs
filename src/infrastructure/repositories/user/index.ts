@@ -1,3 +1,2 @@
 export * from './inmemory-data-service.service';
-export * from './typeorm-data-service.service';
-export * from './user-repository';
+export * from './orm-data-service.service';

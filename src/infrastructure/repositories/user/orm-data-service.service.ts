@@ -6,7 +6,7 @@ import { UsersEntity } from 'infrastructure/database/users.orm-entity';
 
 import { Repository } from 'typeorm';
 @Injectable()
-export class TypeORMDataService
+export class ORMDataService
   extends Repository<UsersEntity>
   implements IUserRepository
 {
