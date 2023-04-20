@@ -1,4 +1,4 @@
-**This repository is still under development**
+**This repository is still under development(In particular, the implementation of CQRS has not yet been started)**
 
 following description is written by ChatGPT.
 
