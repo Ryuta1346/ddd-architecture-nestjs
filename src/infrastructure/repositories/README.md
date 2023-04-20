@@ -1,2 +1,3 @@
 ## Repository
-- Repository層は、永続化層(data-service)の種類(RDB/Redis/InMemory etc)が何であるかを気にせず、永続化層への指示出しを責務とする
+- The repository layer is responsible for interface implementation.
+- Files should be grouped by the interface they implement, not by the type of persistence layer.

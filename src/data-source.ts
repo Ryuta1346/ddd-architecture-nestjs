@@ -1,4 +1,4 @@
-import { Users } from './domain/entities/user.entity';
+import { UsersEntity } from 'infrastructure/database/users.orm-entity';
 import { DataSource } from 'typeorm';
 
 export const AppDataSource = new DataSource({
@@ -8,7 +8,7 @@ export const AppDataSource = new DataSource({
   username: 'ddd_user',
   password: 'password',
   database: 'ddd_verification',
-  entities: [Users],
+  entities: [UsersEntity],
   migrations: ['dist/migrations/*.{ts,js}'], // src配下を指定すると`Cannot use import statement outside a module`になるため /dist指定
   synchronize: false,
 });
