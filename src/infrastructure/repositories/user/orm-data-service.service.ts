@@ -3,6 +3,7 @@ import { AppDataSource } from 'data-source';
 import { Users } from 'domain/entities/user.entity';
 import { IUserRepository } from 'domain/interfaces/iusers-repository';
 import { UsersEntity } from 'infrastructure/database/users.orm-entity';
+import { async } from 'rxjs';
 
 import { Repository } from 'typeorm';
 @Injectable()
@@ -11,9 +12,12 @@ export class ORMDataService
   implements IUserRepository
 {
   async findAll(): Promise<Users[]> {
-    const itemRepository = await AppDataSource.getRepository(
-      UsersEntity,
-    ).find();
+    const itemRepository = await AppDataSource.getRepository(UsersEntity).find({
+      cache: {
+        id: 'users_findAll',
+        milliseconds: 1000 * 60 * 5,
+      },
+    });
     return itemRepository.map(
       (item) => new Users(item.id, item.firstName, item.lastName, item.age),
     );
@@ -21,9 +25,14 @@ export class ORMDataService
   async findOneById(id: number): Promise<Users> {
     const itemRepository = await AppDataSource.getRepository(
       UsersEntity,
-    ).findOneBy({
-      id,
+    ).findOne({
+      where: { id },
+      cache: {
+        id: `users_${id}`,
+        milliseconds: 1000 * 60 * 5,
+      },
     });
+
     return new Users(
       itemRepository.id,
       itemRepository.firstName,
