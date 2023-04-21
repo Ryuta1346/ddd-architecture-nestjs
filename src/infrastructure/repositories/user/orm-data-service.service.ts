@@ -3,7 +3,6 @@ import { AppDataSource } from 'data-source';
 import { Users } from 'domain/entities/user.entity';
 import { IUserRepository } from 'domain/interfaces/iusers-repository';
 import { UsersEntity } from 'infrastructure/database/users.orm-entity';
-import { async } from 'rxjs';
 
 import { Repository } from 'typeorm';
 @Injectable()
