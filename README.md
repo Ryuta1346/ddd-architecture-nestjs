@@ -25,14 +25,37 @@ By using this project as a starting point, developers can quickly build and depl
 Please follow the steps in the documentation to set up the development environment, configure the application, and learn more about the project structure and implementation details.
 
 ### Installation
+
 ```bash
 $ yarn install
 ```
 
 ## Running the app
+
 ```bash
 $ docker compose up -d
 $ yarn start:dev or yarn start
 ```
 
 We hope you find this project valuable in kickstarting your next NestJS/TypeORM application with DDD and CQRS. Happy coding!
+
+## Usage
+
+### Database(MySQL)
+
+In your terminal, it execute following command to connect database.
+
+```bash
+docker compose exec mysql mysql -u root -p
+```
+
+### Cache
+
+This sample app has cache system to cache database query.
+If you would confirm cached query, you could it to execute following command.(you need to install redis-cli)
+
+```bash
+redis-cli -h 127.0.0.1 -p 6379
+keys * // <- confirm all cache keys.
+get <key> <-- confirm cache detail.
+```
