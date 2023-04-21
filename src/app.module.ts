@@ -17,6 +17,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       // entities,
       logging: true,
       synchronize: false,
+      cache: {
+        type: 'ioredis', // ioredisをキャッシュストアとして使用
+        options: {
+          host: 'localhost',
+          port: 6379,
+        },
+      },
     }),
     UserRepositoryModule,
     UserUseCaseModule,
